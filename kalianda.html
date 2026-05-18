@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Praktikum WEBGIS-Pantai Kalianda</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body { margin: 0; }
+#map { height: 100vh; }
+</style>
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<script>
+var map = L.map('map').setView([-5.6684451, 105.5550895], 15);
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    maxZoom: 19
+}).addTo(map);
+
+function buatIcon(warna, ikon, ukuran) {
+    return L.divIcon({
+        html: `<i class="fa-solid ${ikon}" style="color:${warna}; font-size:${ukuran}px;"></i>`,
+        className: '',
+        iconSize: [ukuran, ukuran],
+        iconAnchor: [ukuran/2, ukuran]
+    });
+}
+
+// Lokasi utama
+L.marker([-5.6684451, 105.5550895], {
+    icon: buatIcon("hotpink", "fa-location-dot", 40)
+}).addTo(map).bindPopup("Pantai Kalianda");
+
+// Parkir 
+L.marker([-5.666171, 105.553849], {
+    icon: buatIcon("red", "fa-square-parking", 35)
+}).addTo(map).bindPopup("Area Parkir");
+
+// Spot foto (disamakan area)
+L.marker([-5.6675, 105.5545], {
+    icon: buatIcon("blue", "fa-camera", 35)
+}).addTo(map).bindPopup("Spot Foto");
+
+// Warung
+L.marker([-5.666700, 105.554138], {
+    icon: buatIcon("purple", "fa-utensils", 35)
+}).addTo(map).bindPopup("Warung");
+
+// Muara
+L.marker([-5.6715665, 105.5610113], {
+    icon: buatIcon("green", "fa-water", 35)
+}).addTo(map).bindPopup("Muara");
+
+// Wisata tambahan
+L.marker([-5.6678, 105.5560], {
+    icon: buatIcon("gold", "fa-umbrella-beach", 35)
+}).addTo(map).bindPopup("Area Wisata");
+
+</script>
+
+</body>
+</html>
